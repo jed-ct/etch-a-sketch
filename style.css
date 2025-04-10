@@ -10,7 +10,5 @@ body {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    height: 960px;
-    width: 960px;
     border: 1px solid black;
 }
