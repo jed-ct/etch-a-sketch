@@ -20,6 +20,13 @@ body {
     font-weight: bold;
 }
 
+#canvas-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
 #canvas-container {
     padding: 0;
     display: flex;
