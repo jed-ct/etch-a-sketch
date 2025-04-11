@@ -1,9 +1,23 @@
 body {
     display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
     margin: 0;
     padding: 0;
-    align-items: center;
+}
+
+#header {
+    display: flex;
+    background-color: #1F2937;
+    padding: 10px;
     justify-content: center;
+}
+
+#title {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
 }
 
 #canvas-container {
