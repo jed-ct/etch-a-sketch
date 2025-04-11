@@ -13,17 +13,18 @@ for (let i = 0; i < gridSize; i++) {
         let canvasPixel = document.createElement("div");
         canvasPixel.classList.add("canvas-pixel");
         canvasPixel.style.backgroundColor = "white";
-        canvasPixel.style.height = parseInt(maxCanvasHeight/gridSize) - 2 + "px";
+        canvasPixel.style.height = parseInt(maxCanvasHeight/gridSize) + "px";
         console.log(parseInt(maxCanvasHeight/gridSize) - 2);
-        canvasPixel.style.width = parseInt(maxCanvasWidth/gridSize) - 2 + "px";
+        canvasPixel.style.width = parseInt(maxCanvasWidth/gridSize) + "px";
         canvasPixel.style.border = "1px solid gray";
+        canvasPixel.style.boxSizing = "border-box";
         canvasPixel.style.margin = 0;
         canvasPixelContainer.appendChild(canvasPixel);
     }
 }
 //Adjusts size of canvas to perfectly fit number of pixels specified
-canvasPixelContainer.style.height = (parseInt(document.querySelector(".canvas-pixel").style.height) + 2) * gridSize + "px";
-canvasPixelContainer.style.width = (parseInt(document.querySelector(".canvas-pixel").style.width) + 2) * gridSize + "px";
+canvasPixelContainer.style.height = parseInt(document.querySelector(".canvas-pixel").style.height) * gridSize + "px";
+canvasPixelContainer.style.width = parseInt(document.querySelector(".canvas-pixel").style.width) * gridSize + "px";
 const canvasPixels = document.querySelectorAll(".canvas-pixel");
 canvasPixels.forEach((canvasPixel) => {
     canvasPixel.addEventListener("mouseover", () => {
