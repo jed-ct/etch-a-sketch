@@ -1,6 +1,7 @@
 
 const maxCanvasHeight = 520;
 const maxCanvasWidth = 520;
+let isGridSizeWindowOpen = false;
 let gridSize = 16;
 
 const canvasPixelContainer = document.querySelector("#canvas-container");
@@ -15,6 +16,14 @@ const generateGridSizeButton = document.querySelector("#gridsize-window-button")
 
 inputGridSizeButton.addEventListener("click", () => {
     gridSizeWindow.style.display = "block";
+    isGridSizeWindowOpen = true;
+})
+
+gridSizeInput.addEventListener("keypress", function(event) {
+    if (event.key == "Enter" && isGridSizeWindowOpen) {
+        event.preventDefault();
+        generateGridSizeButton.click();
+    }
 })
 
 generateGridSizeButton.addEventListener("click", () => {
