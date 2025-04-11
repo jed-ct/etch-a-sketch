@@ -4,6 +4,10 @@ body {
     padding: 0;
 }
 
+#gridsize-window {
+    display: none;
+}
+
 #gridsize-popup {
     position: absolute;
     display: flex;
@@ -15,7 +19,7 @@ body {
 
 #gridsize-window-div {
     display: flex;
-    padding: 20px;
+    padding: 10px;
     flex-direction: column;
     position: fixed;
     background-color: #F9FAF8;
