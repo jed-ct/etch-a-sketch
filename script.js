@@ -1,7 +1,7 @@
 
 const maxCanvasHeight = 960;
 const maxCanvasWidth = 960;
-const gridSize = 50;
+const gridSize = parseInt(prompt("Insert grid size."));
 
 const canvasPixelContainer = document.querySelector("#canvas-container");
 canvasPixelContainer.style.maxHeight = maxCanvasHeight + "px";
@@ -19,10 +19,13 @@ for (let i = 0; i < gridSize; i++) {
         canvasPixelContainer.appendChild(canvasPixel);
     }
 }
+//Adjusts height of canvas to perfectly fit number of pixels specified
+canvasPixelContainer.style.height = parseInt(document.querySelector(".canvas-pixel").style.height) * gridSize + "px";
+canvasPixelContainer.style.width = parseInt(document.querySelector(".canvas-pixel").style.width) * gridSize + "px";
 
 const canvasPixels = document.querySelectorAll(".canvas-pixel");
 canvasPixels.forEach((canvasPixel) => {
     canvasPixel.addEventListener("mouseover", () => {
-        canvasPixel.style.backgroundColor = "black";
+        canvasPixel.style.backgroundColor = "red";
     });
 });
