@@ -1,6 +1,6 @@
 
-const maxCanvasHeight = 960;
-const maxCanvasWidth = 960;
+const maxCanvasHeight = 520;
+const maxCanvasWidth = 520;
 const gridSize = 16;
 
 const canvasPixelContainer = document.querySelector("#canvas-container");

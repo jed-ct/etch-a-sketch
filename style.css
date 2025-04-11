@@ -1,11 +1,61 @@
 body {
-    display: flex;
-    flex-direction: column;
     font-family: 'Roboto', sans-serif;
-    display: flex;
     margin: 0;
     padding: 0;
 }
+
+#gridsize-popup {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+#gridsize-window-div {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    position: fixed;
+    background-color: #F9FAF8;
+    border-radius: 10px;
+    z-index: 2;
+    height: 100px;
+    width: 200px;
+    gap: 10px;
+}
+
+#gridsize-window-label {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#gridsize-window-button {
+    background-color: #3882F6;
+    color: #F9FAF8;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+#dark-translucent-bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+#website-content {
+    display: flex;
+    flex-direction: column;
+}
+
 
 #header {
     display: flex;
@@ -20,11 +70,31 @@ body {
     font-weight: bold;
 }
 
+#gridsize-btn {
+    background-color: #3882F6;
+    color: #F9FAF8;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 30px;
+}
+
+#gridsize-btn-div {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+#gridsize-btn:hover {
+    background-color: #23519b;
+}
+
 #canvas-div {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+    padding: 10px;
 }
 
 #canvas-container {
