@@ -46,25 +46,19 @@ function generateCanvas(gridSize) {
             canvasPixel.classList.add("canvas-pixel");
             canvasPixel.style.backgroundColor = "white";
             canvasPixel.style.height = parseInt(maxCanvasHeight/gridSize) + "px";
-            console.log(parseInt(maxCanvasHeight/gridSize) - 2);
             canvasPixel.style.width = parseInt(maxCanvasWidth/gridSize) + "px";
-            canvasPixel.style.border = "1px solid gray";
+            canvasPixel.style.border = "1px solid #dbdbdb";
             canvasPixel.style.boxSizing = "border-box";
             canvasPixel.style.margin = 0;
+            canvasPixel.addEventListener("mouseover", () => {
+                canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
+            });
             canvasPixelContainer.appendChild(canvasPixel);
         }
     }
     //Adjusts size of canvas to perfectly fit number of pixels specified
     canvasPixelContainer.style.height = parseInt(document.querySelector(".canvas-pixel").style.height) * gridSize + "px";
     canvasPixelContainer.style.width = parseInt(document.querySelector(".canvas-pixel").style.width) * gridSize + "px";
-    
-    
-    const canvasPixels = document.querySelectorAll(".canvas-pixel");
-    canvasPixels.forEach((canvasPixel) => {
-        canvasPixel.addEventListener("mouseover", () => {
-            canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
-        });
-    });
 }
 
 
