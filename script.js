@@ -19,6 +19,7 @@ inputGridSizeButton.addEventListener("click", () => {
     isGridSizeWindowOpen = true;
 })
 
+//Event for enter key
 gridSizeInput.addEventListener("keypress", function(event) {
     if (event.key == "Enter" && isGridSizeWindowOpen) {
         event.preventDefault();
@@ -56,10 +57,12 @@ function generateCanvas(gridSize) {
     //Adjusts size of canvas to perfectly fit number of pixels specified
     canvasPixelContainer.style.height = parseInt(document.querySelector(".canvas-pixel").style.height) * gridSize + "px";
     canvasPixelContainer.style.width = parseInt(document.querySelector(".canvas-pixel").style.width) * gridSize + "px";
+    
+    
     const canvasPixels = document.querySelectorAll(".canvas-pixel");
     canvasPixels.forEach((canvasPixel) => {
         canvasPixel.addEventListener("mouseover", () => {
-            canvasPixel.style.backgroundColor = "red";
+            canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
         });
     });
 }

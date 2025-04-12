@@ -89,9 +89,16 @@ body {
     padding: 8px 30px;
 }
 
+#brush-color {
+    border: none;
+    padding: 0px;
+    height: 40px;
+}
+
 #gridsize-btn-div {
     display: flex;
     justify-content: center;
+    gap: 10px;
     padding-top: 30px;
 }
 
