@@ -3,6 +3,7 @@ const maxCanvasHeight = 520;
 const maxCanvasWidth = 520;
 let isGridSizeWindowOpen = false;
 let gridSize = 16;
+let isMouseDown = false;
 
 const canvasPixelContainer = document.querySelector("#canvas-container");
 canvasPixelContainer.style.maxHeight = maxCanvasHeight + "px";
@@ -13,6 +14,13 @@ const gridSizeWindow = document.querySelector("#gridsize-window");
 const gridSizeInput = document.querySelector("#grid-size");
 const generateGridSizeButton = document.querySelector("#gridsize-window-button");
 
+document.addEventListener("mousedown", () => {
+    isMouseDown = true;
+});
+
+document.addEventListener("mouseup", () => {
+    isMouseDown = false;
+});
 
 inputGridSizeButton.addEventListener("click", () => {
     gridSizeWindow.style.display = "block";
@@ -51,6 +59,11 @@ function generateCanvas(gridSize) {
             canvasPixel.style.boxSizing = "border-box";
             canvasPixel.style.margin = 0;
             canvasPixel.addEventListener("mouseover", () => {
+                if (isMouseDown == true) {
+                    canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
+                }
+            });
+            canvasPixel.addEventListener("click", () => {
                 canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
             });
             canvasPixelContainer.appendChild(canvasPixel);
