@@ -58,13 +58,11 @@ function generateCanvas(gridSize) {
             canvasPixel.style.border = "1px solid #dbdbdb";
             canvasPixel.style.boxSizing = "border-box";
             canvasPixel.style.margin = 0;
+            canvasPixel.style.userSelect = "none";
             canvasPixel.addEventListener("mouseover", () => {
                 if (isMouseDown == true) {
                     canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
                 }
-            });
-            canvasPixel.addEventListener("click", () => {
-                canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
             });
             canvasPixelContainer.appendChild(canvasPixel);
         }
