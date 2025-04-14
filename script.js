@@ -6,45 +6,44 @@ let gridSize = 16;
 let isMouseDown = false;
 
 const canvasPixelContainer = document.querySelector("#canvas-container");
-canvasPixelContainer.style.maxHeight = maxCanvasHeight + "px";
-canvasPixelContainer.style.maxWidth = maxCanvasWidth + "px";
-
 const inputGridSizeButton = document.querySelector("#gridsize-btn");
 const gridSizeWindow = document.querySelector("#gridsize-window");
 const gridSizeInput = document.querySelector("#grid-size");
 const generateGridSizeButton = document.querySelector("#gridsize-window-button");
 
+//Set maximum height of the canvas
+canvasPixelContainer.style.maxHeight = maxCanvasHeight + "px";
+canvasPixelContainer.style.maxWidth = maxCanvasWidth + "px";
+
+//Events for hold-to-paint
 document.addEventListener("mousedown", () => {
     isMouseDown = true;
 });
-
 document.addEventListener("mouseup", () => {
     isMouseDown = false;
 });
 
+//Open and close the grid size selector window
 inputGridSizeButton.addEventListener("click", () => {
     gridSizeWindow.style.display = "block";
     isGridSizeWindowOpen = true;
-})
-
-//Event for enter key
-gridSizeInput.addEventListener("keypress", function(event) {
-    if (event.key == "Enter" && isGridSizeWindowOpen) {
-        event.preventDefault();
-        generateGridSizeButton.click();
-    }
-})
-
+});
 generateGridSizeButton.addEventListener("click", () => {
     generateCanvas(gridSizeInput.value);
     gridSizeWindow.style.display = "none";
 });
 
-
-generateCanvas(16);
+//Event for enter key in the grid size selector window
+gridSizeInput.addEventListener("keypress", function(event) {
+    if (event.key == "Enter" && isGridSizeWindowOpen) {
+        event.preventDefault();
+        generateGridSizeButton.click();
+    }
+});
 
 //Create canvas for specified amount of pixels
 function generateCanvas(gridSize) {
+    //Remove existing grids to create new ones
     while (canvasPixelContainer.hasChildNodes()) {
         canvasPixelContainer.removeChild(canvasPixelContainer.firstChild);
     }
@@ -58,7 +57,10 @@ function generateCanvas(gridSize) {
             canvasPixel.style.border = "1px solid #dbdbdb";
             canvasPixel.style.boxSizing = "border-box";
             canvasPixel.style.margin = 0;
-            canvasPixel.style.userSelect = "none";
+            canvasPixel.style.userSelect = "none";  //To make canvas undraggable
+            canvasPixel.addEventListener("mousedown", () => {
+                canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
+            });
             canvasPixel.addEventListener("mouseover", () => {
                 if (isMouseDown == true) {
                     canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
@@ -72,5 +74,7 @@ function generateCanvas(gridSize) {
     canvasPixelContainer.style.width = parseInt(document.querySelector(".canvas-pixel").style.width) * gridSize + "px";
 }
 
+
+generateCanvas(16);
 
 
