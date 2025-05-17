@@ -75,6 +75,13 @@ toggleBordersButton.addEventListener("click", () => {
 
 //Create canvas for specified amount of pixels
 function generateCanvas(gridSize) {
+    let border;
+    if (isBorderShowing) {
+        border = "1px solid #dbdbdb";
+    }
+    else {
+        border = "none";
+    }
     //Remove existing grids to create new ones
     while (canvasPixelContainer.hasChildNodes()) {
         canvasPixelContainer.removeChild(canvasPixelContainer.firstChild);
@@ -86,7 +93,7 @@ function generateCanvas(gridSize) {
             canvasPixel.style.backgroundColor = "white";
             canvasPixel.style.height = parseInt(maxCanvasHeight/gridSize) + "px";
             canvasPixel.style.width = parseInt(maxCanvasWidth/gridSize) + "px";
-            canvasPixel.style.border = "1px solid #dbdbdb";
+            canvasPixel.style.border = border;
             canvasPixel.style.boxSizing = "border-box";
             canvasPixel.style.margin = 0;
             canvasPixel.style.userSelect = "none";  //To make canvas undraggable
