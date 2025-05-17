@@ -4,12 +4,14 @@ const maxCanvasWidth = 560;
 let isGridSizeWindowOpen = false;
 let gridSize = 16;
 let isMouseDown = false;
+let isBorderShowing = true;
 
 const canvasPixelContainer = document.querySelector("#canvas-container");
 const inputGridSizeButton = document.querySelector("#gridsize-btn");
 const gridSizeWindow = document.querySelector("#gridsize-window");
 const gridSizeInput = document.querySelector("#grid-size");
 const generateGridSizeButton = document.querySelector("#gridsize-window-button");
+const toggleBordersButton = document.querySelector("#toggle-border-btn");
 
 //Set maximum height of the canvas
 canvasPixelContainer.style.maxHeight = maxCanvasHeight + "px";
@@ -53,6 +55,24 @@ gridSizeInput.addEventListener("keypress", function(event) {
     }
 });
 
+
+toggleBordersButton.addEventListener("click", () => {
+    if (isBorderShowing) {
+        toggleBordersButton.textContent = "Borders: Off";
+        for (let canvasPixel of document.querySelectorAll(".canvas-pixel")) {
+            canvasPixel.style.border = "none";
+        }
+        isBorderShowing = false;
+    }
+    else {
+        toggleBordersButton.textContent = "Borders: On";
+        for (let canvasPixel of document.querySelectorAll(".canvas-pixel")) {
+            canvasPixel.style.border = "1px solid #dbdbdb";
+        }
+        isBorderShowing = true;
+    }
+})
+
 //Create canvas for specified amount of pixels
 function generateCanvas(gridSize) {
     //Remove existing grids to create new ones
@@ -88,6 +108,7 @@ function generateCanvas(gridSize) {
     canvasPixelContainer.style.height = parseInt(document.querySelector(".canvas-pixel").style.height) * gridSize + "px";
     canvasPixelContainer.style.width = parseInt(document.querySelector(".canvas-pixel").style.width) * gridSize + "px";
 }
+
 
 
 generateCanvas(16);
