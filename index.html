@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Etch-A-Sketch</title>
+    <title>Digi-Canvas</title>
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div id="gridsize-window">
         <div id="gridsize-popup">
             <div id="gridsize-window-div">
+                <div id="gridsize-window-close-div">
+                    <img id="gridsize-window-close" src="close.svg">
+                </div>
                 <div id="gridsize-window-label-div">
                     <label id="gridsize-window-label" for="grid-size">Enter grid size: </label>
                 </div>
@@ -25,7 +28,7 @@
     </div>
     <div id="website-content">
         <div id="header">
-            <div id="title">Etch-A-Sketch</div>
+            <div id="title">Digi-Canvas</div>
         </div>
         <div id="gridsize-btn-div">
             <input type="color" id="brush-color">
@@ -33,6 +36,9 @@
         </div>
         <div id="canvas-div">
             <div id="canvas-container"></div>
+        </div>
+        <div id="gridsize-btn-art">
+
         </div>
     </div>
     <script src="script.js"></script>

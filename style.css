@@ -2,6 +2,7 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+
 }
 
 #gridsize-window {
@@ -19,7 +20,7 @@ body {
 
 #gridsize-window-div {
     display: flex;
-    padding: 20px;
+    padding: 10px;
     flex-direction: column;
     position: fixed;
     background-color: #F9FAF8;
@@ -27,7 +28,6 @@ body {
     z-index: 2;
     height: 100px;
     width: 200px;
-    gap: 10px;
 }
 
 #gridsize-window-label {
@@ -89,10 +89,26 @@ body {
     padding: 8px 30px;
 }
 
+#gridsize-window-close-div {
+    display: flex;
+    justify-content: end;
+    margin: 0px;
+    padding: 0px;
+}
+
+#gridsize-window-close {
+    align-items: left;
+    height: 20px;
+    width: 20px;
+    margin: 0px;
+    padding: 0px;
+}
+
 #brush-color {
     border: none;
     padding: 0px;
     height: 40px;
+    width: 40px;
 }
 
 #gridsize-btn-div {

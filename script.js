@@ -1,6 +1,6 @@
 
-const maxCanvasHeight = 520;
-const maxCanvasWidth = 520;
+const maxCanvasHeight = 560;
+const maxCanvasWidth = 560;
 let isGridSizeWindowOpen = false;
 let gridSize = 16;
 let isMouseDown = false;
@@ -29,8 +29,20 @@ inputGridSizeButton.addEventListener("click", () => {
     isGridSizeWindowOpen = true;
 });
 generateGridSizeButton.addEventListener("click", () => {
-    generateCanvas(gridSizeInput.value);
-    gridSizeWindow.style.display = "none";
+    gridSize = gridSizeInput.value;
+    if (gridSize > 100) {
+        alert("Grid size must be less than 100. Please try again.");
+    }
+    else if (gridSize < 1) {
+        alert("Grid size must be greater than 1. Please try again.");
+    }
+    else if (isNaN(gridSize)) {
+        alert("Grid size must be a number. Please try again.");
+    }
+    else {
+        generateCanvas(gridSize);
+        gridSizeWindow.style.display = "none";
+    }
 });
 
 //Event for enter key in the grid size selector window
@@ -65,6 +77,9 @@ function generateCanvas(gridSize) {
                 if (isMouseDown == true) {
                     canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
                 }
+            canvasPixel.addEventListener("contextmenu", () => {
+                canvasPixel.style.backgroundColor = "white";
+            })
             });
             canvasPixelContainer.appendChild(canvasPixel);
         }
