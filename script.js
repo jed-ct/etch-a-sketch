@@ -12,6 +12,7 @@ const gridSizeWindow = document.querySelector("#gridsize-window");
 const gridSizeInput = document.querySelector("#grid-size");
 const generateGridSizeButton = document.querySelector("#gridsize-window-button");
 const toggleBordersButton = document.querySelector("#toggle-border-btn");
+const clearCanvasButton = document.querySelector("#clear-canvas-btn");
 
 //Set maximum height of the canvas
 canvasPixelContainer.style.maxHeight = maxCanvasHeight + "px";
@@ -55,7 +56,7 @@ gridSizeInput.addEventListener("keypress", function(event) {
     }
 });
 
-
+//For toggling borders
 toggleBordersButton.addEventListener("click", () => {
     if (isBorderShowing) {
         toggleBordersButton.textContent = "Borders: Off";
@@ -71,6 +72,14 @@ toggleBordersButton.addEventListener("click", () => {
         }
         isBorderShowing = true;
     }
+})
+
+//For clearing canvas
+clearCanvasButton.addEventListener("click", () => {
+    canvasPixel = document.querySelectorAll(".canvas-pixel");
+    canvasPixel.forEach((pixel, index)=> {
+        setTimeout(()=> {pixel.style.backgroundColor = "white";}, index * 0.5);
+    })
 })
 
 //Create canvas for specified amount of pixels
