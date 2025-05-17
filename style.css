@@ -79,15 +79,45 @@ body {
     font-weight: bold;
 }
 
-#gridsize-btn {
+
+#canvas-tools-div {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 30px;
+}
+
+.canvas-btn {
     background-color: #3882F6;
     color: #F9FAF8;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     border: none;
     border-radius: 8px;
-    padding: 8px 30px;
+    padding: 8px 25px;
 }
+
+.canvas-btn:hover {
+    background-color: #23519b;
+}
+
+#info-btn {
+    padding: 4px 6px;
+}
+
+#art-tools-div {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
+    gap: 5px;
+}
+
+.tool-btn {
+    padding: 8px 15px;
+    display: flex;
+    gap: 5px;
+}
+
 
 #gridsize-window-close-div {
     display: flex;
@@ -109,23 +139,6 @@ body {
     padding: 0px;
     height: 40px;
     width: 40px;
-}
-
-#gridsize-btn-canvas {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding-top: 30px;
-}
-
-#gridsize-btn-art {
-    display: flex;
-    justify-content: center;
-    padding-bottom: 30px;
-}
-
-#gridsize-btn:hover {
-    background-color: #23519b;
 }
 
 #canvas-div {

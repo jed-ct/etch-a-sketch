@@ -30,16 +30,31 @@
         <div id="header">
             <div id="title">Digi-Canvas</div>
         </div>
-        <div id="gridsize-btn-canvas">
-            <button id="gridsize-btn">Change Canvas Size</button>
-            <button id="toggle-border-btn">Borders: On</button>
-            <button id="clear-canvas-btn">Clear Canvas</button>
+        <div id="canvas-tools-div">
+            <button class="canvas-btn" id="gridsize-btn">Change Canvas Size</button>
+            <button class="canvas-btn" id="toggle-border-btn">Borders: On</button>
+            <button class="canvas-btn" id="clear-canvas-btn">Clear Canvas</button>
+            <button class="canvas-btn" id="info-btn">
+                <img src="./img/info.svg">
+            </button>
         </div>
         <div id="canvas-div">
             <div id="canvas-container"></div>
         </div>
-        <div id="gridsize-btn-art">
+        <div id="art-tools-div">
             <input type="color" id="brush-color">
+            <button class="canvas-btn tool-btn" id="pen-btn">
+                <div>Pen</div>
+                <img src="./img/pen.svg">
+            </button>
+            <button class="canvas-btn tool-btn" id="brush-btn">
+                <div>Gradient Brush</div>
+                <img src="./img/brush.svg">
+            </button>
+            <button class="canvas-btn tool-btn" id="eraser-btn">
+                <div>Eraser</div>
+                <img src="./img/eraser.svg">
+            </button>
         </div>
     </div>
     <script src="script.js"></script>
