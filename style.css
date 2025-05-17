@@ -111,11 +111,17 @@ body {
     width: 40px;
 }
 
-#gridsize-btn-div {
+#gridsize-btn-canvas {
     display: flex;
     justify-content: center;
     gap: 10px;
     padding-top: 30px;
+}
+
+#gridsize-btn-art {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
 }
 
 #gridsize-btn:hover {
