@@ -6,7 +6,7 @@ const maxGridSize = 64;
 let isGridSizeWindowOpen = false;
 let gridSize = 16;
 let isMouseDown = false;
-let isBorderShowing = true;
+let isBorderShowing = false;
 let currentTool = "pen";
 
 
