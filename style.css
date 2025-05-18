@@ -1,8 +1,14 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-
+    background-color: #e9ecef;
 }
 
 #gridsize-window {
@@ -41,7 +47,7 @@ body {
 }
 
 #gridsize-window-button {
-    background-color: #3882F6;
+    background-color: #495057;
     color: #F9FAF8;
     font-size: 16px;
     font-weight: bold;
@@ -68,8 +74,8 @@ body {
 
 #header {
     display: flex;
-    background-color: #1F2937;
-    padding: 10px;
+    background-color: #212529;
+    padding: 20px;
     justify-content: center;
 }
 
@@ -88,7 +94,7 @@ body {
 }
 
 .canvas-btn {
-    background-color: #3882F6;
+    background-color: #495057;
     color: #F9FAF8;
     font-size: 16px;
     font-weight: bold;
@@ -98,7 +104,7 @@ body {
 }
 
 .canvas-btn:hover {
-    background-color: #23519b;
+    background-color: #212529;
 }
 
 #info-btn {
@@ -124,14 +130,19 @@ body {
 }
 
 #pen-btn.active {
-    background-color: #1d4a92;
+    background-color: #343a40;
 }
 
 #gradient-brush-btn.active {
-    background-color: #1d4a92;
+    background-color: #343a40;
+}
 
-}#eraser-btn.active {
-    background-color: #1d4a92;
+#texture-brush-btn.active {
+    background-color: #343a40;
+}
+
+#eraser-btn.active {
+    background-color: #343a40;
 }
 
 #gridsize-window-close-div {
@@ -167,5 +178,5 @@ body {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid black;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

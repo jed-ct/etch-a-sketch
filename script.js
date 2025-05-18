@@ -1,6 +1,8 @@
 
-const maxCanvasHeight = 560;
-const maxCanvasWidth = 560;
+const maxCanvasHeight = 576;
+const maxCanvasWidth = 576;
+const textureColorFactor = 20;
+const maxGridSize = 64;
 let isGridSizeWindowOpen = false;
 let gridSize = 16;
 let isMouseDown = false;
@@ -39,8 +41,8 @@ inputGridSizeButton.addEventListener("click", () => {
 });
 generateGridSizeButton.addEventListener("click", () => {
     gridSize = gridSizeInput.value;
-    if (gridSize > 100) {
-        alert("Grid size must be less than 100. Please try again.");
+    if (gridSize > maxGridSize) {
+        alert(`Grid size must be less than ${maxGridSize}. Please try again.`);
     }
     else if (gridSize < 1) {
         alert("Grid size must be greater than 1. Please try again.");
@@ -143,6 +145,15 @@ function hexToRGBA(hex, alpha) {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
+function hexToRandomizedRGB(hex) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+
+    return `rgb(${r + Math.floor((Math.random() * textureColorFactor) + 1)}, ${g + Math.floor((Math.random() * textureColorFactor) + 1)}, ${b + Math.floor((Math.random() * textureColorFactor) + 1)})`;
+        
+}
+
 function changeTool(toolSelected) {
     removeCanvasEventListener();
     let canvasPixel = document.querySelectorAll(".canvas-pixel");
@@ -159,34 +170,48 @@ function changeTool(toolSelected) {
             });     
         })
     }
-else if (toolSelected == "brush") {
-    console.log("brush selected");
-    canvasPixel.forEach((canvasPixel) => {
-        canvasPixel.addEventListener("mousedown", () => {
-            applyBrush(canvasPixel);
-            console.log("Gradient Brush: " + canvasPixel.dataset.opacity);
-        });
 
-        canvasPixel.addEventListener("mouseover", () => {
-            if (isMouseDown === true) {
+    else if (toolSelected == "brush") {
+        console.log("brush selected");
+        canvasPixel.forEach((canvasPixel) => {
+            canvasPixel.addEventListener("mousedown", () => {
                 applyBrush(canvasPixel);
                 console.log("Gradient Brush: " + canvasPixel.dataset.opacity);
-            }
+            });
+
+            canvasPixel.addEventListener("mouseover", () => {
+                if (isMouseDown === true) {
+                    applyBrush(canvasPixel);
+                    console.log("Gradient Brush: " + canvasPixel.dataset.opacity);
+                }
+            });
         });
-    });
 
-    function applyBrush(pixel) {
-        let currentOpacity = parseFloat(pixel.dataset.opacity);
-        if (currentOpacity < 1) {
-            currentOpacity = Math.min(currentOpacity + 0.15, 1); // Cap at 1 (100%)
-            pixel.dataset.opacity = currentOpacity.toString();
+        function applyBrush(pixel) {
+            let currentOpacity = parseFloat(pixel.dataset.opacity);
+            if (currentOpacity < 1) {
+                currentOpacity = Math.min(currentOpacity + 0.15, 1); // Cap at 1 (100%)
+                pixel.dataset.opacity = currentOpacity.toString();
 
-            const color = document.querySelector("#brush-color").value;
-            const rgbaColor = hexToRGBA(color, currentOpacity);
-            pixel.style.backgroundColor = rgbaColor;
+                const color = document.querySelector("#brush-color").value;
+                const rgbaColor = hexToRGBA(color, currentOpacity);
+                pixel.style.backgroundColor = rgbaColor;
+            }
         }
     }
-}
+
+    else if (toolSelected == "texture-brush") {
+        canvasPixel.forEach((canvasPixel, index) => {
+            canvasPixel.addEventListener("mousedown", () => {
+                canvasPixel.style.backgroundColor = hexToRandomizedRGB(document.querySelector("#brush-color").value);
+            });
+            canvasPixel.addEventListener("mouseover", () => {
+                if (isMouseDown == true) {
+                    canvasPixel.style.backgroundColor = hexToRandomizedRGB(document.querySelector("#brush-color").value);
+                }
+            });     
+        })
+    }
 
     else if (toolSelected == "eraser") {
         canvasPixel.forEach((canvasPixel, index) => {
