@@ -84,21 +84,24 @@ toggleBordersButton.addEventListener("click", () => {
 
 //For Art
 penButton.addEventListener("click", () => {
-    changeTool("pen");
+    currentTool = "pen";
+    changeTool(currentTool);
     penButton.classList.add("active");
     brushButton.classList.remove("active");
     eraserButton.classList.remove("active");
 })
 
 brushButton.addEventListener("click", ()=> {
-    changeTool("brush");
+    currentTool = "brush";
+    changeTool(currentTool);
     penButton.classList.remove("active");
     brushButton.classList.add("active");
     eraserButton.classList.remove("active");
 })
 
 eraserButton.addEventListener("click", () => {
-    changeTool("eraser");
+    currentTool = "eraser";
+    changeTool(eraser);
     penButton.classList.remove("active");
     brushButton.classList.remove("active");
     eraserButton.classList.add("active");
@@ -208,6 +211,7 @@ function generateCanvas(gridSize) {
     //Adjusts size of canvas to perfectly fit number of pixels specified
     canvasPixelContainer.style.height = parseInt(document.querySelector(".canvas-pixel").style.height) * gridSize + "px";
     canvasPixelContainer.style.width = parseInt(document.querySelector(".canvas-pixel").style.width) * gridSize + "px";
+    changeTool(currentTool);
 }
 
 
