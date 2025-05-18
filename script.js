@@ -12,6 +12,7 @@ let currentTool = "pen";
 
 const canvasPixelContainer = document.querySelector("#canvas-container");
 const inputGridSizeButton = document.querySelector("#gridsize-btn");
+const closeGridsizeWindowButton = document.querySelector("#gridsize-window-close-btn");
 const gridSizeWindow = document.querySelector("#gridsize-window");
 const gridSizeInput = document.querySelector("#grid-size");
 const generateGridSizeButton = document.querySelector("#gridsize-window-button");
@@ -21,6 +22,7 @@ const penButton = document.querySelector("#pen-btn");
 const brushButton = document.querySelector("#gradient-brush-btn");
 const eraserButton = document.querySelector("#eraser-btn");
 const textureBrushButton = document.querySelector("#texture-brush-btn");
+const gridSizeErrorMessage = document.querySelector("#gridsize-window-error");
 
 //Set maximum height of the canvas
 canvasPixelContainer.style.maxHeight = maxCanvasHeight + "px";
@@ -38,22 +40,31 @@ document.addEventListener("mouseup", () => {
 inputGridSizeButton.addEventListener("click", () => {
     gridSizeWindow.style.display = "block";
     isGridSizeWindowOpen = true;
+    gridSizeErrorMessage.style.display = "none";
 });
 generateGridSizeButton.addEventListener("click", () => {
     gridSize = gridSizeInput.value;
     if (gridSize > maxGridSize) {
-        alert(`Grid size must be less than ${maxGridSize}. Please try again.`);
+
+        gridSizeErrorMessage.style.display = "block";
+        gridSizeErrorMessage.textContent = `Grid size must be less than ${maxGridSize}. Please try again.`;
     }
     else if (gridSize < 1) {
-        alert("Grid size must be greater than 1. Please try again.");
+        gridSizeErrorMessage.style.display = "block";
+        gridSizeErrorMessage.textContent = "Grid size must be greater than 1. Please try again.";
     }
     else if (isNaN(gridSize)) {
-        alert("Grid size must be a number. Please try again.");
+        gridSizeErrorMessage.style.display = "block";
+        gridSizeErrorMessage.textContent = "Grid size must be a number. Please try again.";
     }
     else {
         generateCanvas(gridSize);
         gridSizeWindow.style.display = "none";
     }
+});
+
+closeGridsizeWindowButton.addEventListener("click", () => {
+    gridSizeWindow.style.display = "none";
 });
 
 //Event for enter key in the grid size selector window

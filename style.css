@@ -8,7 +8,8 @@ body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e9ecef;
+    background-image: url(./img/bg.png);
+    background-position: center;
 }
 
 #gridsize-window {
@@ -24,26 +25,54 @@ body {
     width: 100%;
 }
 
+#gridsize-window-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px;
+}
+
 #gridsize-window-div {
     display: flex;
-    padding: 10px;
+    padding: 0px;
     flex-direction: column;
     position: fixed;
     background-color: #F9FAF8;
     border-radius: 10px;
     z-index: 2;
-    height: 100px;
-    width: 200px;
+    max-height: 400px;
+    max-width: 250px;
 }
 
 #gridsize-window-label {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: bold;
+}
+
+#gridsize-window-close-div {
+    background-color: #495057;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#gridsize-window-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    height: 30px;
+    width: 30px;
+}
+
+#gridsize-window-error {
+    background-color: rgb(192, 192, 192);
+    padding: 10px;
+    display: none;
 }
 
 #grid-size {
     font-size: 16px;
-    width: 90%;
+    width: 95%;
 }
 
 #gridsize-window-button {
@@ -54,6 +83,10 @@ body {
     border: none;
     border-radius: 8px;
     padding: 8px 12px;
+}
+
+#gridsize-window-button:hover {
+    background-color: #212529;
 }
 
 #dark-translucent-bg {
@@ -75,13 +108,13 @@ body {
 #header {
     display: flex;
     background-color: #212529;
-    padding: 20px;
+    padding: 10px;
     justify-content: center;
 }
 
 #title {
     color: white;
-    font-size: 32px;
+    font-size: 40px;
     font-weight: bold;
 }
 
@@ -90,6 +123,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 10px;
+    margin-bottom: 5px;
     padding-top: 30px;
 }
 
@@ -115,6 +149,7 @@ body {
     display: flex;
     justify-content: center;
     padding-bottom: 30px;
+    margin-top: 5px;
     gap: 5px;
 }
 
@@ -179,4 +214,5 @@ body {
     display: flex;
     flex-wrap: wrap;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: white;
 }
