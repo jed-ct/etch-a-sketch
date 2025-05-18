@@ -118,6 +118,16 @@ body {
     gap: 5px;
 }
 
+#pen-btn.active {
+    background-color: #1d4a92;
+}
+
+#brush-btn.active {
+    background-color: #1d4a92;
+
+}#eraser-btn.active {
+    background-color: #1d4a92;
+}
 
 #gridsize-window-close-div {
     display: flex;

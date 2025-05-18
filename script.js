@@ -5,6 +5,11 @@ let isGridSizeWindowOpen = false;
 let gridSize = 16;
 let isMouseDown = false;
 let isBorderShowing = true;
+let isPenSelected = true;
+let isBrushSelected = false;
+let isEraserSelected = false;
+let currentTool = "pen";
+
 
 const canvasPixelContainer = document.querySelector("#canvas-container");
 const inputGridSizeButton = document.querySelector("#gridsize-btn");
@@ -13,6 +18,9 @@ const gridSizeInput = document.querySelector("#grid-size");
 const generateGridSizeButton = document.querySelector("#gridsize-window-button");
 const toggleBordersButton = document.querySelector("#toggle-border-btn");
 const clearCanvasButton = document.querySelector("#clear-canvas-btn");
+const penButton = document.querySelector("#pen-btn");
+const brushButton = document.querySelector("#brush-btn");
+const eraserButton = document.querySelector("#eraser-btn");
 
 //Set maximum height of the canvas
 canvasPixelContainer.style.maxHeight = maxCanvasHeight + "px";
@@ -74,13 +82,100 @@ toggleBordersButton.addEventListener("click", () => {
     }
 })
 
+//For Art
+penButton.addEventListener("click", () => {
+    changeTool("pen");
+    penButton.classList.add("active");
+    brushButton.classList.remove("active");
+    eraserButton.classList.remove("active");
+})
+
+brushButton.addEventListener("click", ()=> {
+    changeTool("brush");
+    penButton.classList.remove("active");
+    brushButton.classList.add("active");
+    eraserButton.classList.remove("active");
+})
+
+eraserButton.addEventListener("click", () => {
+    changeTool("eraser");
+    penButton.classList.remove("active");
+    brushButton.classList.remove("active");
+    eraserButton.classList.add("active");
+})
+
+
+
 //For clearing canvas
 clearCanvasButton.addEventListener("click", () => {
-    canvasPixel = document.querySelectorAll(".canvas-pixel");
+    let canvasPixel = document.querySelectorAll(".canvas-pixel");
     canvasPixel.forEach((pixel, index)=> {
         setTimeout(()=> {pixel.style.backgroundColor = "white";}, index * 0.5);
+        pixel.dataset.opacity = "0"; 
     })
 })
+
+function changeTool(toolSelected) {
+    let canvasPixel = document.querySelectorAll(".canvas-pixel");
+    if (toolSelected == "pen") {
+        penButton.classList.add("active");
+        canvasPixel.forEach((canvasPixel, index) => {
+            canvasPixel.addEventListener("mousedown", () => {
+                canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
+            });
+            canvasPixel.addEventListener("mouseover", () => {
+                if (isMouseDown == true) {
+                    canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
+                }
+            });            
+        })
+    }
+else if (toolSelected == "brush") {
+    canvasPixel.forEach((canvasPixel) => {
+        canvasPixel.addEventListener("mousedown", () => {
+            applyBrush(canvasPixel);
+        });
+
+        canvasPixel.addEventListener("mouseover", () => {
+            if (isMouseDown === true) {
+                applyBrush(canvasPixel);
+            }
+        });
+    });
+
+    function applyBrush(pixel) {
+        let currentOpacity = parseFloat(pixel.dataset.opacity);
+        if (currentOpacity < 1) {
+            currentOpacity = Math.min(currentOpacity + 0.15, 1); // Cap at 1 (100%)
+            pixel.dataset.opacity = currentOpacity.toString();
+
+            const color = document.querySelector("#brush-color").value;
+            const rgbaColor = hexToRGBA(color, currentOpacity);
+            pixel.style.backgroundColor = rgbaColor;
+        }
+    }
+
+    function hexToRGBA(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+}
+
+    else if (toolSelected == "eraser") {
+        canvasPixel.forEach((canvasPixel, index) => {
+            canvasPixel.addEventListener("mousedown", () => {
+                canvasPixel.style.backgroundColor = "white";
+            });
+            canvasPixel.addEventListener("mouseover", () => {
+                if (isMouseDown == true) {
+                    canvasPixel.style.backgroundColor = "white";
+                }
+            });            
+        })        
+    }
+}
 
 //Create canvas for specified amount of pixels
 function generateCanvas(gridSize) {
@@ -106,17 +201,7 @@ function generateCanvas(gridSize) {
             canvasPixel.style.boxSizing = "border-box";
             canvasPixel.style.margin = 0;
             canvasPixel.style.userSelect = "none";  //To make canvas undraggable
-            canvasPixel.addEventListener("mousedown", () => {
-                canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
-            });
-            canvasPixel.addEventListener("mouseover", () => {
-                if (isMouseDown == true) {
-                    canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
-                }
-            canvasPixel.addEventListener("contextmenu", () => {
-                canvasPixel.style.backgroundColor = "white";
-            })
-            });
+            canvasPixel.dataset.opacity = "0"; 
             canvasPixelContainer.appendChild(canvasPixel);
         }
     }
@@ -126,7 +211,7 @@ function generateCanvas(gridSize) {
 }
 
 
-
 generateCanvas(16);
+changeTool("pen");
 
 
