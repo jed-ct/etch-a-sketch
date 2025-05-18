@@ -115,14 +115,19 @@ body {
 .tool-btn {
     padding: 8px 15px;
     display: flex;
+    align-items: center;
     gap: 5px;
+}
+
+#gradient-brush-btn, #texture-brush-btn {
+    gap: 10px;
 }
 
 #pen-btn.active {
     background-color: #1d4a92;
 }
 
-#brush-btn.active {
+#gradient-brush-btn.active {
     background-color: #1d4a92;
 
 }#eraser-btn.active {

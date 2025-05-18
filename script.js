@@ -5,9 +5,6 @@ let isGridSizeWindowOpen = false;
 let gridSize = 16;
 let isMouseDown = false;
 let isBorderShowing = true;
-let isPenSelected = true;
-let isBrushSelected = false;
-let isEraserSelected = false;
 let currentTool = "pen";
 
 
@@ -19,8 +16,9 @@ const generateGridSizeButton = document.querySelector("#gridsize-window-button")
 const toggleBordersButton = document.querySelector("#toggle-border-btn");
 const clearCanvasButton = document.querySelector("#clear-canvas-btn");
 const penButton = document.querySelector("#pen-btn");
-const brushButton = document.querySelector("#brush-btn");
+const brushButton = document.querySelector("#gradient-brush-btn");
 const eraserButton = document.querySelector("#eraser-btn");
+const textureBrushButton = document.querySelector("#texture-brush-btn");
 
 //Set maximum height of the canvas
 canvasPixelContainer.style.maxHeight = maxCanvasHeight + "px";
@@ -88,6 +86,7 @@ penButton.addEventListener("click", () => {
     changeTool(currentTool);
     penButton.classList.add("active");
     brushButton.classList.remove("active");
+    textureBrushButton.classList.remove("active");
     eraserButton.classList.remove("active");
 })
 
@@ -96,14 +95,25 @@ brushButton.addEventListener("click", ()=> {
     changeTool(currentTool);
     penButton.classList.remove("active");
     brushButton.classList.add("active");
+    textureBrushButton.classList.remove("active");
+    eraserButton.classList.remove("active");
+})
+
+textureBrushButton.addEventListener("click", () => {
+    currentTool = "texture-brush";
+    changeTool(currentTool);
+    penButton.classList.remove("active");
+    brushButton.classList.remove("active");
+    textureBrushButton.classList.add("active");
     eraserButton.classList.remove("active");
 })
 
 eraserButton.addEventListener("click", () => {
     currentTool = "eraser";
-    changeTool(eraser);
+    changeTool(currentTool);
     penButton.classList.remove("active");
     brushButton.classList.remove("active");
+    textureBrushButton.classList.remove("active");
     eraserButton.classList.add("active");
 })
 
@@ -118,7 +128,23 @@ clearCanvasButton.addEventListener("click", () => {
     })
 })
 
+//To remove previous listeners
+function removeCanvasEventListener() {
+    let canvasPixel = document.querySelectorAll(".canvas-pixel");
+    canvasPixel.forEach((canvasPixel, index) => {
+        canvasPixel.replaceWith(canvasPixel.cloneNode(true));
+    });
+}
+
+function hexToRGBA(hex, alpha) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 function changeTool(toolSelected) {
+    removeCanvasEventListener();
     let canvasPixel = document.querySelectorAll(".canvas-pixel");
     if (toolSelected == "pen") {
         penButton.classList.add("active");
@@ -130,18 +156,21 @@ function changeTool(toolSelected) {
                 if (isMouseDown == true) {
                     canvasPixel.style.backgroundColor = document.querySelector("#brush-color").value;
                 }
-            });            
+            });     
         })
     }
 else if (toolSelected == "brush") {
+    console.log("brush selected");
     canvasPixel.forEach((canvasPixel) => {
         canvasPixel.addEventListener("mousedown", () => {
             applyBrush(canvasPixel);
+            console.log("Gradient Brush: " + canvasPixel.dataset.opacity);
         });
 
         canvasPixel.addEventListener("mouseover", () => {
             if (isMouseDown === true) {
                 applyBrush(canvasPixel);
+                console.log("Gradient Brush: " + canvasPixel.dataset.opacity);
             }
         });
     });
@@ -157,23 +186,19 @@ else if (toolSelected == "brush") {
             pixel.style.backgroundColor = rgbaColor;
         }
     }
-
-    function hexToRGBA(hex, alpha) {
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
-        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-    }
 }
 
     else if (toolSelected == "eraser") {
         canvasPixel.forEach((canvasPixel, index) => {
             canvasPixel.addEventListener("mousedown", () => {
-                canvasPixel.style.backgroundColor = "white";
+                canvasPixel.style.backgroundColor = "#ffffff";
+                canvasPixel.dataset.opacity = "0";
             });
             canvasPixel.addEventListener("mouseover", () => {
                 if (isMouseDown == true) {
-                    canvasPixel.style.backgroundColor = "white";
+                canvasPixel.style.backgroundColor = "#ffffff";
+                console.log("Eraser: " + canvasPixel.dataset.opacity);
+                canvasPixel.dataset.opacity = "0";
                 }
             });            
         })        
