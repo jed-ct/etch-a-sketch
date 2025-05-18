@@ -3,6 +3,11 @@ const maxCanvasHeight = 576;
 const maxCanvasWidth = 576;
 const textureColorFactor = 20;
 const maxGridSize = 64;
+
+
+
+
+
 let isGridSizeWindowOpen = false;
 let gridSize = 16;
 let isMouseDown = false;
@@ -23,6 +28,9 @@ const brushButton = document.querySelector("#gradient-brush-btn");
 const eraserButton = document.querySelector("#eraser-btn");
 const textureBrushButton = document.querySelector("#texture-brush-btn");
 const gridSizeErrorMessage = document.querySelector("#gridsize-window-error");
+const infoButton = document.querySelector("#info-btn");
+const infoWindow = document.querySelector("#info-window");
+const infoCloseButton = document.querySelector("#info-window-close-btn");
 
 //Set maximum height of the canvas
 canvasPixelContainer.style.maxHeight = maxCanvasHeight + "px";
@@ -41,7 +49,15 @@ inputGridSizeButton.addEventListener("click", () => {
     gridSizeWindow.style.display = "block";
     isGridSizeWindowOpen = true;
     gridSizeErrorMessage.style.display = "none";
+    document.querySelector("body").classList.add("modal-open");
 });
+
+infoButton.addEventListener("click", () => {
+    infoWindow.style.display = "block";
+    document.querySelector("body").classList.add("modal-open");
+});
+
+
 generateGridSizeButton.addEventListener("click", () => {
     gridSize = gridSizeInput.value;
     if (gridSize > maxGridSize) {
@@ -58,13 +74,20 @@ generateGridSizeButton.addEventListener("click", () => {
         gridSizeErrorMessage.textContent = "Grid size must be a number. Please try again.";
     }
     else {
-        generateCanvas(gridSize);
+        generateCanvas(parseInt(gridSize));
         gridSizeWindow.style.display = "none";
     }
+    document.querySelector("body").classList.remove("modal-open");
 });
 
 closeGridsizeWindowButton.addEventListener("click", () => {
     gridSizeWindow.style.display = "none";
+    document.querySelector("body").classList.remove("modal-open");
+});
+
+infoCloseButton.addEventListener("click", () => {
+    infoWindow.style.display = "none";
+    document.querySelector("body").classList.remove("modal-open");
 });
 
 //Event for enter key in the grid size selector window
@@ -276,7 +299,7 @@ function generateCanvas(gridSize) {
 }
 
 
-generateCanvas(16);
+generateCanvas(gridSize);
 changeTool("pen");
 
 

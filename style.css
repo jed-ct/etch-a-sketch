@@ -12,11 +12,20 @@ body {
     background-position: center;
 }
 
+a {
+    color:#495057;
+    text-decoration: none;
+}
+body.modal-open {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
 #gridsize-window {
     display: none;
 }
 
-#gridsize-popup {
+#gridsize-popup, #info-popup {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -49,13 +58,13 @@ body {
     font-weight: bold;
 }
 
-#gridsize-window-close-div {
+#gridsize-window-close-div, #info-window-close-div {
     background-color: #495057;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 
-#gridsize-window-close-btn {
+#gridsize-window-close-btn, #info-window-close-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,6 +106,68 @@ body {
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
+}
+
+#info-window {
+    display: none;
+}
+
+#info-popup {
+    display: flex;
+    align-items: center;
+}
+
+#info-window-div {
+    margin: 10px;
+    display: flex;
+    padding: 0px;
+    flex-direction: column;
+    position: fixed;
+    background-color: #F9FAF8;
+    border-radius: 10px;
+    z-index: 2;
+    max-height: 800px;
+    width: 600px;
+    font-size: 13px;
+}
+
+#info-window-content {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.info-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+}
+
+#info-content {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tool-title {
+    font-weight: bold;
+}
+
+ul, p {
+    margin: 3px;
+    text-align: justify;
+}
+
+#info-tools {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #495057;
+}
+#info-window-close-div {
+    display: flex;
+    justify-content: end;
 }
 
 #website-content {
